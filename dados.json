@@ -1,0 +1,648 @@
+{
+    "basePath": "/",
+    "definitions": {
+        "Localidade": {
+            "properties": {
+                "tipo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                }
+            }
+        },
+        "Logradouro": {
+            "properties": {
+                "tipo": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                }
+            }
+        },
+        "EnderecoEspecial": {
+            "properties": {
+                "tipo": {
+                    "type": "string"
+                },
+                "endereco": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                }
+            }
+        },
+        "Cep": {
+            "properties": {
+                "cep": {
+                    "type": "string"
+                },
+                "uf": {
+                    "type": "string"
+                },
+                "bairro": {
+                    "type": "string"
+                },
+                "complemento": {
+                    "type": "string"
+                },
+                "municipio": {
+                    "type": "string"
+                },
+                "localidade": {
+                    "$ref": "#/definitions/Localidade"
+                },
+                "logradouro": {
+                    "$ref": "#/definitions/Logradouro"
+                },
+                "enderecoEspecial": {
+                    "$ref": "#/definitions/EnderecoEspecial"
+                }
+            }
+        },
+        "Pessoa": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "documento": {
+                    "type": "string"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "tipoPessoa": {
+                   "format": "int32",
+                    "type": "integer"
+                }
+            }
+        },
+        "Banco": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "banco": {
+                    "type": "string"
+                },
+                "agencia": {
+                    "type": "string"
+                }
+            }
+        },
+        "PessoaBanco": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "pessoa": {
+                    "$ref": "#/definitions/Pessoa"
+                },
+                "banco": {
+                    "$ref": "#/definitions/Banco"
+                }
+            }
+        },
+        "Movimento": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "pessoaBanco": {
+                    "$ref": "#/definitions/PessoaBanco"
+                },
+                "tipo": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "motivo": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidade": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "data": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dataProcessamento": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "LinhaMovimento": {
+            "properties": {
+                "documento": {
+                    "type": "string"
+                },
+                "banco": {
+                    "type": "string"
+                },
+                "agencia": {
+                    "type": "string"
+                },
+                "motivo": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidade": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "data": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "dataProcessamento": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "LinhaMovimentoPorPessoaBancoMotivo": {
+            "properties": {
+                "documento": {
+                    "type": "string"
+                },
+                "banco": {
+                    "type": "string"
+                },
+                "agencia": {
+                    "type": "string"
+                },
+                "motivo": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidade": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "dataUltimaAlteracao": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "ResumoRemocaoMovimentoPorPessoaBancoMotivo": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "movimento": {
+                    "$ref": "#/definitions/Movimento"
+                },
+                "removeuRegistro": {
+                    "type": "boolean"
+                },
+                "quantidadeRegistro": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidadeRemover": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "dataExclusao": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "LinhaMovimentoPorPessoaBancoMotivo": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "documento": {
+                    "type": "string"
+                },
+                "banco": {
+                    "type": "string"
+                },
+                "agencia": {
+                    "type": "string"
+                },
+                "motivo": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidade": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "nome": {
+                    "type": "string"
+                },
+                "dataUltimaAlteracao": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        },
+        "ProcessamentoRemessa": {
+            "properties": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "remessa": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "quantidade": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "data": {
+                    "format": "int64",
+                    "type": "integer"
+                },
+                "dataProcessamento": {
+                    "format": "int64",
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "info": {
+        "description": "Página para documentar e exemplificar a API REST do DataSharing",
+        "title": "DataSharing",
+        "version": "1.0"
+    },
+    "paths": {
+        "/cep/api/busca_cep/{cep}": {
+            "get": {
+                "description": "Retorna os dados do CEP",
+                "parameters": [
+                    {
+                        "description": "CEP a ser pesquisado",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "cep",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json",
+                    "text/plain", "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Cep"
+                        }
+                    },
+                    "404": {
+                        "description": "Cep não encontrado"
+                    }
+                },
+                "summary": "Cep",
+                "tags": [
+                    "cep"
+                ]
+            }
+        },
+        "/cep/api/busca_cep/": {
+            "get": {
+                "description": "",
+                "parameters": [
+                    {
+                        "description": "UF do estado",
+                        "in": "query",
+                        "name": "uf",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome da Cidade",
+                        "in": "query",
+                        "name": "municipio",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome do Bairro",
+                        "in": "query",
+                        "name": "bairro",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Nome do Logradouro",
+                        "in": "query",
+                        "name": "logradouro",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "description": "Limite de registros a serem retornados pela pesquisa",
+                        "in": "query",
+                        "name": "limit",
+                        "required": false,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                    "application/json", "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/Cep"
+							}
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request, se a UF ou Cidade não for encontrada; Se o limit for informado e for menor que 1"
+                    }
+                },
+                "summary": "Lista de Cep's",
+                "tags": [
+                    "cep"
+                ]
+            }
+        },
+        "/ccf/api/processor/movimento": {
+            "post": {
+                "description": "Submete um arquivo de movimento para ser processado",
+                "parameters": [
+                    {
+						"name": "file",
+						"in": "formData",
+						"description": "Arquivo a ser processado",
+						"required": true,
+						"type": "file"
+					},
+					{
+						"name": "ignorar_sequencia",
+						"in": "query",
+						"description": "Flag para ignorar a validacao de sequencia (ultima+1)",
+						"required": false,
+						"type": "boolean"
+					}
+                ],
+                "consumes": [
+					"multipart/form-data"
+				],
+                "responses": {
+                    "202": {
+                        "description": "Arquivo submetido com sucesso"
+                    },
+                    "400": {
+                    	"description": "Possíveis causas: Remessa é menor ou igual à última remessa submetida; Remessa é maior que (ultima_remessa+1) - Exceto quando for informado ignore_sequence=true"
+               
+                    },
+                    "406": {
+                    	"description": "Quando existir o processamento de remessa ou batimento não finalizado - caso esteja em processamento ou caso tenha ocorreido um erro no processamento anterior"
+               
+                    },
+                    "500": {
+                    	"description": "Quando o arquivo estiver inválido"
+                    }
+                },
+                "summary": "Submete arquivo de remessa",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+         "/ccf/api/processor/batimento": {
+            "post": {
+                "description": "Submete um arquivo de batimento para ser processado",
+                "parameters": [
+                    {
+						"name": "file",
+						"in": "formData",
+						"description": "Arquivo a ser processado",
+						"required": true,
+						"type": "file"
+					}
+                ],
+                "consumes": [
+					"multipart/form-data"
+				],
+                "responses": {
+                    "202": {
+                        "description": "Arquivo submetido com sucesso"
+                    },
+                    "406": {
+                    	"description": "Quando existir o processamento de remessa ou batimento não finalizado - caso esteja em processamento ou caso tenha ocorreido um erro no processamento anterior"
+               
+                    },
+                    "500": {
+                    	"description": "Quando o arquivo estiver inválido"
+                    }
+                },
+                "summary": "Submete arquivo de batimento",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+        "/ccf/api/report/movimentos/{documento}": {
+            "get": {
+                "description": "Retorna os movimentos do documento informado",
+                "parameters": [
+                    {
+                        "description": "Documento a ser pesquisado",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "documento",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json", "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                         "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/LinhaMovimento"
+							}
+                        }
+                    }
+                },
+                "summary": "Lista de movimentos",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+        "/ccf/api/report/situacao/{documento}": {
+            "get": {
+                "description": "Retorna a situacao da pessoa, os registros sao agrupados por pessoa/ducumento - banco/agencia - motivo",
+                "parameters": [
+                    {
+                        "description": "Documento a ser pesquisado",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "documento",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json", "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                         "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/LinhaMovimentoPorPessoaBancoMotivo"
+							}
+                        }
+                    }
+                },
+                "summary": "Lista de situações",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+        "/ccf/api/report/exclusoes/{dataInicio}/{dataFinal}": {
+            "get": {
+                "description": "Retorna o resumo de todas exclusoes feitas de acordo com o período de tempo informado",
+                "parameters": [
+                    {
+                        "description": "Data inicial - em milisegundos",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "dataInicio",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "Data final - em milisegundos",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "dataFinal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json", "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                         "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/ResumoRemocaoMovimentoPorPessoaBancoMotivo"
+							}
+                        }
+                    }
+                },
+                "summary": "Lista de exclusões",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+        "/ccf/api/report/remessas/{dataInicio}/{dataFinal}": {
+            "get": {
+                "description": "Retorna o resumo de todas remessas enviadas",
+                "parameters": [
+                    {
+                        "description": "Data inicial - em milisegundos",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "dataInicio",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "description": "Data final - em milisegundos",
+                        "format": "int64",
+                        "in": "path",
+                        "name": "dataFinal",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "produces": [
+                	"application/json" , "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                         "schema": {
+                            "type": "array",
+							"items": {
+								"$ref": "#/definitions/ProcessamentoRemessa"
+							}
+                        }
+                    }
+                },
+                "summary": "Lista de remessas",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        },
+        "/ccf/api/report/remessas/ultima": {
+            "get": {
+                "description": "Retorna a última remessa submetida",
+                "produces": [
+                	"application/json" , "application/xml"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                         "schema": {
+                            "$ref": "#/definitions/ProcessamentoRemessa"
+                        }
+                    }
+                },
+                "summary": "Remessa",
+                "tags": [
+                    "ccf"
+                ]
+            }
+        }
+    },
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "tags": [
+        {
+            "description": "Resource CEP",
+            "name": "cep"
+        },
+        {
+            "description": "Resource CCF",
+            "name": "ccf"
+        }
+    ]
+}
