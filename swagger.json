@@ -53,6 +53,56 @@
                         "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
                         "schema": {
                             "$ref": "#/definitions/Token"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "dados": {
+                                    "documento": "05334699961",
+                                    "dataInicio": 19860721
+                                },
+                                "identificacao": {
+                                    "id": "CONSULTAFILIAL12"
+                                },
+                                "resposta": {
+                                    "servico": "Receita Federal - Situação Cadastral",
+                                    "blocos": [
+                                        {
+                                            "id": "situacao-cadastral",
+                                            "tamanho": 20,
+                                            "titulo": "Situação Cadastral",
+                                            "relevancia": "Informativo",
+                                            "campos": [
+                                                {
+                                                    "name": "nome",
+                                                    "tamanho": 15,
+                                                    "titulo": "Nome",
+                                                    "conteudo": "Adilson Krasovski"
+                                                },
+                                                {
+                                                    "name": "situacao",
+                                                    "tamanho": 5,
+                                                    "titulo": "Situação",
+                                                    "conteudo": "Ativo"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "comprovante": null,
+                                            "tamanho": 12,
+                                            "titulo": "Comprovante",
+                                            "relevancia": "Informativo",
+                                            "campos": [
+                                                {
+                                                    "name": "comprovante",
+                                                    "tamanho": 12,
+                                                    "titulo": "Comprovante",
+                                                    "conteudo": "SDF98867SD9F8S"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
                         }
                     },
                     "401": {
