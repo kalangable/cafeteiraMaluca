@@ -1,0 +1,71 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Ibracred Research",
+        "description": "Api para realização de consultas a fontes de informação.",
+        "version": "1.0.0"
+    },
+    "host": "cliente.ibratan.com.br",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/ibracred-research",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/tokens": {
+            "get": {
+                "summary": "Gerador de Token.",
+                "description": "Este recurso permite ao cliente a geração de Token para acesso aos serviços de consultas aos birôs de informação.\n",
+                "parameters": [
+                    {
+                        "name": "ApiHash",
+                        "in": "header",
+                        "description": "Hash gerado pela interface Web.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "validade",
+                        "in": "query",
+                        "description": "Infome a validade em horas para o token gerado.",
+                        "required": true,
+                        "type": "number",
+                        "format": "short"
+                    }
+                ],
+                "tags": [
+                    "Token"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "401": {
+                        "description": "Usuário não autorizado."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Token": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "description": "Chave de acesso."
+                },
+                "cript": {
+                    "type": "string",
+                    "description": "Hash para criptografia dos dados de acesso."
+                }
+            }
+        }
+    }
+}
