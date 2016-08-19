@@ -17,7 +17,7 @@
         "/tokens": {
             "get": {
                 "summary": "Gerador de Token.",
-                "description": "Este recurso permite ao cliente a geração de Token para acesso aos serviços de consultas aos birôs de informação.\n",
+                "description": "Este recurso permite ao cliente a geração de Token para acesso aos serviços de consultas aos birôs de informação.",
                 "parameters": [
                     {
                         "name": "ApiHash",
@@ -65,6 +65,10 @@
                     "type": "string",
                     "description": "Hash para criptografia dos dados de acesso."
                 }
+            },
+            "example": {
+                "token": "E68C72567E7E678195642E2F7B124",
+                "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
             }
         }
     }
