@@ -56,52 +56,57 @@
                         },
                         "examples": {
                             "application/json": {
-                                "dados": {
-                                    "documento": "05334699961",
-                                    "dataInicio": 19860721
-                                },
-                                "identificacao": {
-                                    "id": "CONSULTAFILIAL12"
-                                },
-                                "resposta": {
-                                    "servico": "Receita Federal - Situação Cadastral",
-                                    "blocos": [
-                                        {
-                                            "id": "situacao-cadastral",
-                                            "tamanho": 20,
-                                            "titulo": "Situação Cadastral",
-                                            "relevancia": "Informativo",
-                                            "campos": [
-                                                {
-                                                    "name": "nome",
-                                                    "tamanho": 15,
-                                                    "titulo": "Nome",
-                                                    "conteudo": "Adilson Krasovski"
-                                                },
-                                                {
-                                                    "name": "situacao",
-                                                    "tamanho": 5,
-                                                    "titulo": "Situação",
-                                                    "conteudo": "Ativo"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "comprovante": null,
-                                            "tamanho": 12,
-                                            "titulo": "Comprovante",
-                                            "relevancia": "Informativo",
-                                            "campos": [
-                                                {
-                                                    "name": "comprovante",
-                                                    "tamanho": 12,
-                                                    "titulo": "Comprovante",
-                                                    "conteudo": "SDF98867SD9F8S"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
+                                "name": "receita-federal",
+                                "type": "object",
+                                "title": "Receita Federal - Situação Cadastral",
+                                "values": [
+                                    {
+                                        "name": "situacao-cadastral",
+                                        "type": "object",
+                                        "title": "Situação Cadastral",
+                                        "lenght": 20,
+                                        "relevancy": "Info",
+                                        "values": [
+                                            {
+                                                "name": "nome",
+                                                "type": "string",
+                                                "title": "Nome",
+                                                "lenght": 15,
+                                                "value": "Adilson Krasovski"
+                                            },
+                                            {
+                                                "name": "situacao",
+                                                "type": "string",
+                                                "title": "Situação",
+                                                "lenght": 5,
+                                                "value": "Ativo"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "comprovante",
+                                        "type": "object",
+                                        "title": "Comprovante",
+                                        "lenght": 35,
+                                        "relevancy": "Info",
+                                        "values": [
+                                            {
+                                                "name": "comprovante",
+                                                "type": "string",
+                                                "title": "Comprovante",
+                                                "lenght": 25,
+                                                "value": "DS98F6SD09F6SD6F-SWSD-0"
+                                            },
+                                            {
+                                                "name": "data",
+                                                "type": "date",
+                                                "title": "Data",
+                                                "lenght": 10,
+                                                "value": 20160819
+                                            }
+                                        ]
+                                    }
+                                ]
                             }
                         }
                     },
