@@ -3,7 +3,12 @@
     "info": {
         "title": "Ibracred Research",
         "description": "Api para realização de consultas a fontes de informação.",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "contact": {
+            "name": "Suporte Ibratan",
+            "url": "http://nacc.tan.com.br",
+            "email": "suporte@ibratan.com.br"
+        }
     },
     "host": "cliente.ibratan.com.br",
     "schemes": [
@@ -13,11 +18,92 @@
     "produces": [
         "application/json"
     ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
+        "/receita-federal/imposto-renda": {
+            "get": {
+                "summary": "Consulta as informações da Receita Federal referente ao imposto de renda.",
+                "description": "Esta consulta é realizada no site da receita federal.\n",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token de autorização para realização de consultas no Ibracred.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Objeto com as informações para realização de consulta.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Consulta"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Receita Federal - Imposto de renda"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "401": {
+                        "description": "Usuário não autorizado."
+                    }
+                }
+            }
+        },
+        "/receita-federal/situacao-cadastral": {
+            "get": {
+                "summary": "Consulta as informações da Receita Federal.",
+                "description": "Esta consulta é realizada no site da receita federal.\n",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Token de autorização para realização de consultas no Ibracred.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "request",
+                        "in": "body",
+                        "description": "Objeto com as informações do cliente para realização de consulta.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Consulta"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Receita Federal - Situação Cadastral"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
+                        "schema": {
+                            "$ref": "#/definitions/Token"
+                        }
+                    },
+                    "401": {
+                        "description": "Usuário não autorizado."
+                    }
+                }
+            }
+        },
         "/tokens": {
             "get": {
                 "summary": "Gerador de Token.",
-                "description": "Este recurso permite ao cliente a geração de Token para acesso aos serviços de consultas aos birôs de informação.",
+                "description": "Este recurso permite ao cliente a geração de Token para acesso aos\nserviços de consultas aos birôs de informação.\n",
                 "parameters": [
                     {
                         "name": "ApiHash",
@@ -32,8 +118,8 @@
                         "in": "query",
                         "description": "Infome a validade em horas para o token gerado.",
                         "required": true,
-                        "type": "number",
-                        "format": "integer",
+                        "type": "integer",
+                        "format": "int32",
                         "maximum": 9999
                     }
                 ],
@@ -47,10 +133,8 @@
                             "$ref": "#/definitions/Token"
                         },
                         "examples": {
-                            "application/json": {
-                                "token": "E68C72567E7E678195642E2F7B124",
-                                "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
-                            }
+                            "token": "E68C72567E7E678195642E2F7B124",
+                            "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
                         }
                     },
                     "401": {
@@ -76,7 +160,104 @@
             "required": [
                 "token",
                 "cript"
-            ]
+            ],
+            "example": {
+                "token": "E68C72567E7E678195642E2F7B124",
+                "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
+            }
+        },
+        "Consulta": {
+            "type": "object",
+            "properties": {
+                "dados": {
+                    "type": "object",
+                    "title": "Dados",
+                    "required": [
+                        "documento"
+                    ],
+                    "properties": {
+                        "documento": {
+                            "type": "string",
+                            "title": "Documento(CPF/CNPJ)",
+                            "description": "Documento do consultado."
+                        },
+                        "nome": {
+                            "type": "string",
+                            "title": "Razão Social",
+                            "description": "Nome do consultado."
+                        },
+                        "dataInicio": {
+                            "type": "string",
+                            "title": "Data de Nascimento ou Fundação",
+                            "format": "date",
+                            "description": "Data de Nascimento ou fundação."
+                        }
+                    }
+                },
+                "identificacao": {
+                    "type": "object",
+                    "title": "Identificacao",
+                    "required": [
+                        "id"
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "title": "Identificação",
+                            "description": "Campo para que o cliente informe uma identificação sobre a origem da requisição. Utilizado para rateio."
+                        },
+                        "descricao": {
+                            "type": "string",
+                            "title": "Descrição",
+                            "description": "Valor utilizado para identificação em relatórios. Quando não informado é utilizado o campo de identificação."
+                        }
+                    }
+                },
+                "acesso": {
+                    "title": "Dados de Acesso",
+                    "description": "Informações para acesso aos birôs.",
+                    "type": "object",
+                    "required": [
+                        "usuario",
+                        "senha"
+                    ],
+                    "properties": {
+                        "usuario": {
+                            "type": "string",
+                            "title": "Usuário",
+                            "description": "Usuário de Acesso ao birô."
+                        },
+                        "senha": {
+                            "type": "string",
+                            "title": "Senha",
+                            "description": "Nome do consultado."
+                        },
+                        "tokens": {
+                            "type": "array",
+                            "title": "Tokens",
+                            "description": "Tokens de acesso ao birô.",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "example": {
+                "dados": {
+                    "nome": "Adilson Krasovski",
+                    "documento": "05334699961",
+                    "dataInicio": 19860721
+                },
+                "identificacao": {
+                    "id": "CONSULTAFILIAL12",
+                    "descricao": "Filial12"
+                },
+                "acesso": {
+                    "usuario": "IOHFOEIJNVCPAO",
+                    "senha": "PFJISA8F7SD98F7SD89GFS"
+                }
+            }
         }
     }
 }
