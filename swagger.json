@@ -33,7 +33,8 @@
                         "description": "Infome a validade em horas para o token gerado.",
                         "required": true,
                         "type": "number",
-                        "format": "short"
+                        "format": "integer",
+                        "maximum": 9999
                     }
                 ],
                 "tags": [
@@ -67,7 +68,8 @@
                 }
             },
             "required": [
-                "token", "cript"
+                "token",
+                "cript"
             ],
             "example": {
                 "token": "E68C72567E7E678195642E2F7B124",
