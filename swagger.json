@@ -188,8 +188,10 @@
                             "$ref": "#/definitions/Token"
                         },
                         "examples": {
-                            "token": "E68C72567E7E678195642E2F7B124",
-                            "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
+                            "application/json": {
+                                "token": "E68C72567E7E678195642E2F7B124",
+                                "cript": "2553E85ED2AE8DCC858B41D8CD6B4"
+                            }
                         }
                     },
                     "401": {
