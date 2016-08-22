@@ -23,7 +23,7 @@
     ],
     "paths": {
         "/receita-federal/imposto-renda": {
-            "get": {
+            "post": {
                 "summary": "Consulta as informações da Receita Federal referente ao imposto de renda.",
                 "description": "Esta consulta é realizada no site da receita federal.\n",
                 "parameters": [
@@ -117,7 +117,7 @@
             }
         },
         "/receita-federal/situacao-cadastral": {
-            "get": {
+            "post": {
                 "summary": "Consulta as informações da Receita Federal.",
                 "description": "Esta consulta é realizada no site da receita federal.\n",
                 "parameters": [
@@ -144,9 +144,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
+                        "description": "Objetos com as informações de Receita Federal - Situação Cadastral.",
                         "schema": {
-                            "$ref": "#/definitions/Token"
+                            "$ref": "#/definitions/Resposta"
                         }
                     },
                     "401": {
@@ -202,6 +202,124 @@
         }
     },
     "definitions": {
+        "Resposta": {
+            "type": "object",
+            "properties": {
+                "cache": {
+                    "type": "object",
+                    "properties": {
+                        "date": {
+                            "description": "Timestamp - Data e hora da consulta original que foi reaproveitada.",
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                },
+                "executionTime": {
+                    "description": "Tempo de resposta em milissegundo.",
+                    "type": "number"
+                },
+                "name": {
+                    "description": "Sugestão do identificador de servico.",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "Sugestão nome do serviço.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Identifica o tipo de informação.",
+                    "type": "string",
+                    "default": "Service",
+                    "enum": [
+                        "Service"
+                    ]
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "description": "Sugestão do identificador do bloco.",
+                                "type": "string"
+                            },
+                            "label": {
+                                "description": "Sugestão do nome do bloco para exibição.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "description": "Identifica o tipo de informação.",
+                                "type": "string",
+                                "default": "Object",
+                                "enum": [
+                                    "Object"
+                                ]
+                            },
+                            "maxLength": {
+                                "description": "Tamanho total que o bloco poderá possuir.",
+                                "type": "integer",
+                                "format": "int32"
+                            },
+                            "relevancy": {
+                                "description": "Sugestão de relavancia do bloco.",
+                                "type": "string",
+                                "default": "Info",
+                                "enum": [
+                                    "Info",
+                                    "Warninng",
+                                    "Restrictive"
+                                ]
+                            },
+                            "values": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "description": "Sugestão do identificador do campo.",
+                                            "type": "string"
+                                        },
+                                        "label": {
+                                            "description": "Sugestão do nome do campo para exibição.",
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "description": "Identifica o tipo de informação.",
+                                            "type": "string",
+                                            "default": "Object",
+                                            "enum": [
+                                                "Object",
+                                                "Service",
+                                                "Integer",
+                                                "Real",
+                                                "Date",
+                                                "Time",
+                                                "String"
+                                            ]
+                                        },
+                                        "maxLength": {
+                                            "description": "Tamanho total que o bloco poderá possuir.",
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "length": {
+                                            "description": "Tamanho que o conteúdo apresenta.",
+                                            "type": "integer",
+                                            "format": "int32"
+                                        },
+                                        "value": {
+                                            "description": "Conteúdo retornado pelo birô.",
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "Token": {
             "type": "object",
             "properties": {
@@ -247,7 +365,7 @@
                             "type": "string",
                             "title": "Data de Nascimento ou Fundação",
                             "format": "date",
-                            "description": "Data de Nascimento ou fundação."
+                            "description": "Data de Nascimento ou fundação - YYYYMMDD."
                         }
                     }
                 },
