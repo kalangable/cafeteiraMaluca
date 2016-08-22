@@ -5,8 +5,8 @@
         "description": "Api para realização de consultas a fontes de informação.",
         "version": "1.0.0",
         "contact": {
-            "name": "Suporte Ibratan",
-            "url": "http://nacc.tan.com.br",
+            "name": "Ibratan",
+            "url": "https://www.ibratan.com.br/sistema-de-analise-de-credito-ibracred/",
             "email": "suporte@ibratan.com.br"
         }
     },
