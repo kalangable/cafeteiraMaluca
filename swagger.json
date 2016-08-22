@@ -52,7 +52,7 @@
                     "200": {
                         "description": "Objeto com as informações necessárias para geração dos dados de acesso e chave de criptografia para proteção dos dados de acesso ao birô.",
                         "schema": {
-                            "$ref": "#/definitions/Token"
+                            "$ref": "#/definitions/Resposta"
                         },
                         "examples": {
                             "application/json": {
